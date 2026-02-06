@@ -16,8 +16,10 @@ wget -O $C/models/onnx/vitpose-l-wholebody.onnx https://huggingface.co/JunkyByte
 
 wget -O $C/models/sam2/sam2_hiera_base_plus.safetensors https://huggingface.co/Kijai/sam2-safetensors/resolve/main/sam2_hiera_base_plus.safetensors || true
 
+C=/workspace/ComfyUI
 cd $C/models/checkpoints
-git clone https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled || true
+[ -d WanVideo_comfy_fp8_scaled ] || GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/Kijai/WanVideo_comfy_fp8_scaled
 cd $C/models/checkpoints/WanVideo_comfy_fp8_scaled
-git lfs pull || true
+git lfs install
+git lfs pull --include="Wan22Animate/*" || true
 ln -sfn $C/models/checkpoints/WanVideo_comfy_fp8_scaled/Wan22Animate $C/models/checkpoints/Wan22Animate || true
