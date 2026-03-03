@@ -32,15 +32,6 @@ python3 -m venv venv || true
 pip install -U pip setuptools wheel
 pip install -r requirements.txt
 
-if ! python - << 'EOF'
-import torch, torch.cuda
-print(torch.cuda.is_available())
-EOF
-then
-  pip install --force-reinstall --index-url https://download.pytorch.org/whl/cu128 \
-    torch torchvision torchaudio
-fi
-
 mkdir -p "$C/custom_nodes"
 cd "$C/custom_nodes"
 for r in \
@@ -60,4 +51,7 @@ do
   fi
 done
 
-echo "[PROVISION] Done. ComfyUI and all nodes installed."
+wget -O /workspace/scripts/downloads.sh \
+  https://raw.githubusercontent.com/SeanFrohman/files/main/downloads.sh
+chmod +x /workspace/scripts/downloads.sh
+/workspace/scripts/downloads.sh || true
