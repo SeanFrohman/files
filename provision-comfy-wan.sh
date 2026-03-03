@@ -69,10 +69,3 @@ do
     (cd "$name" && git pull || true)
   fi
 done
-
-# --------- WAN / control / segment models ---------
-wget -O /workspace/scripts/downloads.sh \
-  https://raw.githubusercontent.com/SeanFrohman/files/refs/heads/main/downloads.sh
-chmod +x /workspace/scripts/downloads.sh
-/workspace/scripts/downloads.sh || true
-
